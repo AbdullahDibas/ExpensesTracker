@@ -1,0 +1,43 @@
+<div class="main container" *ngIf="!_isAddView && !_selectedExpCategory">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">Expenses Categories List
+        <a (click)="onAddNew()" class="pull-right">
+          <span class="glyphicon glyphicon-plus-sign"></span>
+        </a>
+        <a (click)="onDeleteBtnClicked()" class="pull-right" [class.disabled]="!_selectedExpCategoriesIds || _selectedExpCategoriesIds.length == 0">
+          <span class="glyphicon glyphicon-remove-sign"  [class.disabled]="!_selectedExpCategoriesIds || _selectedExpCategoriesIds.length == 0"></span>
+        </a>
+      </div>
+      <div class="panel-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Description</th>
+              <th>Parent Category</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of _expensesCategories">
+              <td>
+                <input type="checkbox"(change)="onCheckCategory(category._id)">
+              </td>
+              <td>
+                <a (click)="onSelect(category)">{{category.title}}</a>
+              </td>
+              <td>{{category.parentCategoryId?_expensesCategoriesService.getExpCategoryName(category.parentCategoryId): ""}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<app-add-expenses-category #addExpCat *ngIf="_isAddView || _selectedExpCategory" [expenseCategory]="_selectedExpCategory"
+  (onSubmit)="onNewAddedExpenseCategory($event)" (onCancel)="_isAddView = false; _selectedExpCategory = null;"></app-add-expenses-category>

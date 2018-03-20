@@ -1,0 +1,37 @@
+table {
+    background-color:white;
+}
+h1{
+    text-align: center;
+    color: white;
+}
+.row{
+    margin-bottom: 20px;
+}
+
+div.dashboard{
+    width: 250px;
+    height: 200px;
+    background-color: black;
+    color:white;
+    box-shadow: 1px 1px 5px 5px yellow;
+    margin: 0px 50px 50px 10px;
+}
+
+div.dashboard span{
+    font-size:25px;
+    text-align: center;
+}
+
+.dashboard dd{
+    color: gold;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+
+.flex-center-vertically {
+    display: flex;
+    justify-content: center;
+    flex-direction: column; 
+  }

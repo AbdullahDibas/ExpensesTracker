@@ -1,0 +1,6 @@
+[
+    {"_Id": "1", "amount": 10, "date": "10/01/2018", "title" : "JEA Registring Fees", "expenseCategoryId" : -1 },
+    {"_Id": "2", "amount": 20, "date": "10/01/2018", "title" : "Public Transportation", "expenseCategoryId" : -1 },
+    {"_Id": "3", "amount": 30, "date": "10/01/2018", "title" : "Lunch Meal", "expenseCategoryId" : -1 },
+    {"_Id": "4", "amount": 40, "date": "10/01/2018", "title" : "Bank Extra Fees", "expenseCategoryId" : -1 }
+]

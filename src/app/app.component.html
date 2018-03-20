@@ -1,0 +1,14 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div [ngClass]="{shrinked:applyShrinkClass}">
+    <div class="sidenav" #sidebarNav>
+        <div>
+            <a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+            <a [routerLink]="['/ExpensesList']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Expenses</a>
+            <a [routerLink]="['/ExpensesCategories']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Expenses Categories</a>
+        </div>
+        <button class="btn btn-primary btn-xs toggle" (click)="shrinkSidenav()">
+            <span class="glyphicon glyphicon-chevron-left" [ngClass]="{'glyphicon-chevron-right':applyShrinkClass, 'glyphicon-chevron-left':!applyShrinkClass}"></span>
+        </button>
+    </div>
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,25 @@
+<div class="main container">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">Add New Expenses Category</div>
+      <div class="panel-body">
+        <form [formGroup]="expenseCategoryFG" (ngSubmit)="onCategoryAdded(expenseCategoryFG.value)">
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control" placeholder="Category Name" formControlName="description">
+          </div>
+          <div class="form-group">
+            <label>Parent Category</label>
+            <select class="form-control" formControlName="expenseCategoryId">
+              <option disabled [selected]="!expenseCategory || !expenseCategory.parentCategoryId">Select Parent Category ...</option>
+              <option *ngFor="let category of availableExpensesCategories" [selected]="expenseCategory && expenseCategory.parentCategoryId == category._id">
+                <a href="#">{{category.title}}</a>
+              </option>
+            </select>
+          </div>
+          <app-form-footer (onCancel)="onCancel.emit()"></app-form-footer>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

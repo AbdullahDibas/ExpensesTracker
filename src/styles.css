@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("..\\node_modules\\bootstrap\\dist\\css\\bootstrap.css");
+
+nav{
+   height: 50px;
+}
+  
+nav ul{
+    height: calc(100%);
+    margin-top:5px;  
+}
+ 
+nav div h4{ 
+    top:20%;
+    position: relative; 
+    font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    font-style: italic;
+    font-weight: 700;
+    color: rgba(255, 213, 0, 0.89);
+} 
+
+body{
+    background-color: rgba(0, 0, 0, 0.767) ;
+}
+ 
+.main{  
+    height: calc(100vh - 50px);
+    width: 80%;    
+    position: relative; 
+    float: right;
+    padding-left: 50px;
+    transition: 200ms;
+}
+.shrinked .main{
+    transition: 200ms;
+    width: 90%; 
+ }
+ 
+.main .row{
+    width:95%;
+}
+
+.main .row:first-child{
+    margin-top: 80px;
+}
+
+.panel-default {
+    border: none;
+}
+.panel-default .panel-heading{
+    background-color: gold;
+    color: black; 
+    font-weight: 700;
+}
+
+.btn.btn-default{
+    background-color: black;
+    color: white; 
+}
+
+.glyphicon-plus-sign, .glyphicon-remove-sign {
+    font-size: 25px;
+    color: black;
+}
+
+.glyphicon-plus-sign.disabled, .glyphicon-remove-sign.disabled{ 
+    color: darkslategrey
+}
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+ }
+
+ .form-group label {  
+    width: 15%;  
+    float:left;
+}
+
+.form-group select, input:not([type="checkbox"]) {     
+    width: 85%;
+}
+ 
+.form-group input[type="checkbox"] {     
+    width: 30px; 
+}

@@ -1,0 +1,49 @@
+<div class="container main" *ngIf="!_isAddView && !_selectedExpense">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">Expenses
+        <a (click)="onAddNew()" class="pull-right">
+          <span class="glyphicon glyphicon-plus-sign"></span>
+        </a>
+        <a (click)="onDeleteBtnClicked()" class="pull-right" [class.disabled]="!_selectedExpensesIds || _selectedExpensesIds.length == 0">
+          <span class="glyphicon glyphicon-remove-sign" [class.disabled]="!_selectedExpensesIds || _selectedExpensesIds.length == 0"></span>
+        </a>
+      </div>
+      <div class="panel-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Category</th>
+              <th>interval</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let expense of _expenses">
+              <td>
+                <input type="checkbox" (change)="onCheckExpense(expense._id)">
+              </td>
+              <td>
+                <a (click)="onSelect(expense)">{{expense.title}}</a>
+              </td>
+              <td>{{expense.amount}}</td>
+              <td>{{expense.expenseCategoryId?expCategorySVC.getExpCategoryName(expense.expenseCategoryId): ""}}</td>
+              <td>{{ExpensePeriod[expense.interval]}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<app-add-daily-expense *ngIf="_isAddView || _selectedExpense" [expense]="_selectedExpense" (onSubmit)="onNewAddedExpense($event)"
+  (onCancel)="_isAddView = false; _selectedExpense = null;"></app-add-daily-expense>

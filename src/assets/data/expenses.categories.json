@@ -1,0 +1,6 @@
+[
+    {"_id": "1","title": "Home Bills", "parentCategoryId" : -1, "expenses": []},
+    {"_id": "2","title": "Transportation", "parentCategoryId" : -1, "expenses": []},
+    {"_id": "3","title": "Food", "parentCategoryId" : -1, "expenses": []},
+    {"_id": "4","title": "Loans", "parentCategoryId" : -1, "expenses": []}
+]

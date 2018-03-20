@@ -1,0 +1,53 @@
+.sidenav{ 
+    width: 20%;
+    background-color: black;
+    height: calc(100vh - 50px);
+    position: absolute;  
+    top: 50px;
+    overflow: hidden; 
+    transition: 200ms;
+  } 
+
+  .shrinked .sidenav{
+     transition: 200ms;
+     width: 10%; 
+  }
+
+  .sidenav div a,span { 
+    color:white;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.sidenav div a:hover {
+    background-color: rgba(255, 213, 0, 0.719);
+    color: black;
+    transition: 500ms;
+} 
+
+.sidenav div .active{
+    background-color: gold;
+    color: black;
+}
+
+.sidenav .toggle{
+    background-color: transparent;
+    color:gold;
+    top: 50%;
+    right: 0; 
+    position: absolute;
+    border:6px solid gold;    
+    transition:500ms;
+}
+
+.sidenav .toggle:hover{ 
+    background-color: gold;
+    color: black;
+    transition:500ms;
+}
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+} 
