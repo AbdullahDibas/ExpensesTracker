@@ -2,6 +2,20 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.2.
 
+## Prodjext Status
+
+The project is still in its beginning and has not been completed yet. 
+The following are the current pending changes:
+Project Structure Changes:
+1. Express.js will be used for the server.
+2. A connection to MonogDB will be added.
+
+Project Business Features:
+1. Users' accounts verification. 
+2. More dashboards will be added for a better view for users' expenses.
+3. The ability to specify and view expenses targets.
+4. The ability to assign alarms and notifications. 
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
