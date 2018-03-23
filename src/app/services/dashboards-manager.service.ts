@@ -15,7 +15,7 @@ export class DashboardsManagerService {
 
   constructor(private _http: Http,
     private _expensesSVC: ExpensesDataService,
-    _expCategoriesSVC: ExpenseCategoryDataService) { }
+    private _expCategoriesSVC: ExpenseCategoryDataService) { }
 
   getHighestMonthInTheYear = function () {
     let allExpenses = this._expensesSVC.getExpenses();
@@ -52,15 +52,23 @@ export class DashboardsManagerService {
     if (currentMonthExpenses.length > 0) {
       let categoriesAmounts: Map<number, number> = this.getMonthCategoriesAmounts(currentMonth);
       if (categoriesAmounts) {
-        var maxCategoryAmount: number;
+        var maxCategoryAmount: string = "";
         let _array = Array.from(categoriesAmounts.values());
-        var categoryIdAmount = _array.reduce((a,b) => Math.max(a,b));
-     
-        return categoriesAmounts[categoryIdAmount];
+        var categoryIdAmount = _array.reduce((a, b) => Math.max(a, b));
+
+        categoriesAmounts.forEach( (v, k, m) => {
+          if (v == categoryIdAmount) {
+            if(maxCategoryAmount != ""){
+              maxCategoryAmount += ", ";
+            }
+            maxCategoryAmount += this._expCategoriesSVC.getExpCategoryName(k);
+          }
+        });
+        return maxCategoryAmount;
       }
     }
     else {
-      return -1;
+      return "";
     }
   }
 
@@ -70,9 +78,13 @@ export class DashboardsManagerService {
     let kvp: Map<number, number> = new Map<number, number>();
 
     if (monthExpenses.length > 0) {
+
+      // get distinct expenses categories in the month.
       monthExpensesCategoriesIds = new Set(monthExpenses.map((exp) => exp.expenseCategoryId));
       if (monthExpensesCategoriesIds.size > 0) {
         Array.from(monthExpensesCategoriesIds).forEach((id) =>
+
+          // build a Map: Key: Category ID, Value: Category expenses total amount in the month.
           kvp.set(id,
             monthExpenses.filter(exp => exp.expenseCategoryId == id)
               .map((exp: Expense) => this.getAmount(exp))

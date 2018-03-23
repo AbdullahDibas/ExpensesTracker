@@ -29,9 +29,15 @@ div.dashboard span{
     font-size: 30px;
 }
 
-
 .flex-center-vertically {
     display: flex;
     justify-content: center;
     flex-direction: column; 
-  }
+}
+
+.noDataMSG {
+    color:rgba(0, 0, 0, 0.741);
+    font-weight: 700;  
+    text-align: center;
+    font-style: italic;
+}
