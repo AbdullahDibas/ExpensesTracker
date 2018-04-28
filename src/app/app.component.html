@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div [ngClass]="{shrinked:applyShrinkClass}">
-    <div class="sidenav" #sidebarNav>
+<div [ngClass]="{shrinked:applyShrinkClass}"> 
+    <div class="sidenav" #sidebarNav *ngIf ="true">
         <div>
             <a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Home</a>
             <a [routerLink]="['/ExpensesList']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Expenses</a>

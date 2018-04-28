@@ -1,0 +1,18 @@
+div.dashboard{
+    width: 250px;
+    height: 200px;
+    background-color: black;
+    color:white; 
+    margin: 0px 50px 50px 10px;
+}
+
+div.dashboard span{
+    font-size:25px;
+    text-align: center;
+}
+
+.flex-center-vertically {
+    display: flex;
+    justify-content: center;
+    flex-direction: column; 
+}
