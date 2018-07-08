@@ -43,7 +43,8 @@
         </table>
       </div>
     </div>
-  </div>
+  </div>  
 </div>
 <app-add-daily-expense *ngIf="_isAddView || _selectedExpense" [expense]="_selectedExpense" (onSubmit)="onNewAddedExpense($event)"
   (onCancel)="_isAddView = false; _selectedExpense = null;"></app-add-daily-expense>
+  

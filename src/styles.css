@@ -24,7 +24,7 @@ body{
 }
  
 .main{  
-    height: calc(100vh - 50px);
+    height: calc(100vh - 90px);
     width: 80%;    
     position: relative; 
     float: right;
@@ -41,8 +41,23 @@ body{
 }
 
 .main .row:first-child{
-    margin-top: 80px;
+    margin-top: 40px;
 }
+
+.mainFooter{ 
+    transition: 200ms;
+    width:80%; 
+    height:40px;
+    background-color:#9e7676;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.shrinked .mainFooter{
+    transition: 200ms;
+    width: 90%; 
+ }
 
 .panel-default {
     border: none;

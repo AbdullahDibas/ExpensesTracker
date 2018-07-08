@@ -11,6 +11,7 @@ import { AddDailyExpenseComponent } from './components/add-daily-expense/add-dai
 import { AddExpensesCategoryComponent } from './components/add-expenses-category/add-expenses-category.component';
 import { FormFooterComponent } from './components/form-footer/form-footer.component';
 import { RouterModule } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,6 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     RouterModule
   ],
-  providers: [ExpensesDataService, ExpenseCategoryDataService]
+  providers: [ExpensesDataService, ExpenseCategoryDataService, AuthService ]
 })
 export class AppModule { }

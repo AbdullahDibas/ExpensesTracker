@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login.component'; 
+import { AuthService } from './services/auth.service';
+declare var gapi: any;
 
 @Component({
   selector: 'app-app',
@@ -14,4 +16,15 @@ export class AppComponent {
   shrinkSidenav = function () {
     this.applyShrinkClass = !this.applyShrinkClass;
   }
+
+  constructor(private authSVC: AuthService){ }
+
+  onSignOut = function() { 
+    var authSVC = this.authSVC;
+
+    var auth2 = gapi.auth2.getAuthInstance();    
+    auth2.signOut().then(function () {
+      authSVC.onLogOut();
+    });
+  } 
 }

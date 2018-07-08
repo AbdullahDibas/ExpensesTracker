@@ -3,19 +3,29 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
- 
-  constructor(private router : Router) {}
-  
+
+  constructor(private router: Router) { }
+
   isUserLoggedIn: boolean = false;
-   
-  redirectUrl : string;
+
+  redirectUrl: string;
 
   onLoginSuccess = function () {
     this.isUserLoggedIn = true;
-    this.router.navigate([this.redirectUrl]);
+    if (!this.redirectUrl) {
+      this.router.navigate(['/']);
+    }
+    else {
+      this.router.navigate([this.redirectUrl]);
+    }
   }
 
   onLoginFailure = function () {
     this.isUserLoggedIn = false;
-  } 
+  }
+
+  onLogOut = function () {
+    this.isUserLoggedIn = false;
+    this.router.navigate(['/Login']);
+  }
 }

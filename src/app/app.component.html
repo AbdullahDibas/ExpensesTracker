@@ -5,10 +5,12 @@
             <a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Home</a>
             <a [routerLink]="['/ExpensesList']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Expenses</a>
             <a [routerLink]="['/ExpensesCategories']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Expenses Categories</a>
+         
         </div>
         <button class="btn btn-primary btn-xs toggle" (click)="shrinkSidenav()">
             <span class="glyphicon glyphicon-chevron-left" [ngClass]="{'glyphicon-chevron-right':applyShrinkClass, 'glyphicon-chevron-left':!applyShrinkClass}"></span>
         </button>
     </div>
-    <router-outlet></router-outlet>
+    <router-outlet></router-outlet> 
+    <div class="mainFooter" *ngIf="true"><span><a href="#" style="float:right; color:black" (click)="onSignOut()">Logout</a></span></div>
 </div>
