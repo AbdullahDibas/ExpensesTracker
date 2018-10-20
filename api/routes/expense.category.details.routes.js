@@ -1,0 +1,1 @@
+var ExpenseCategoryDetails = require('../models/expense.category.details');

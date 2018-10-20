@@ -16,14 +16,14 @@ const appRoutes: Routes = [
         children: [
             { path: '', component: HomeComponent },
             { path: 'ExpensesList', component: ExpensesListComponent },
-            { path: 'ExpensesCategories', component: ExpensesCategoriesListComponent },
-            { path: '*', component: HomeComponent }]
+            { path: 'ExpensesCategories', component: ExpensesCategoriesListComponent }/*,
+        { path: '*', component: HomeComponent }*/]
     },
-    { path: 'Login', component: LoginComponent },
+    { path: 'Login', component: LoginComponent }/*,
     {
         path: '*', loadChildren: 'app/app.module#AppModule',
         canActivate: [CanActivateViaAuthGaurdService]
-    }
+    }*/
 ];
 
 @NgModule({

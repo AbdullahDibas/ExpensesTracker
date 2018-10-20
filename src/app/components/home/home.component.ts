@@ -25,13 +25,15 @@ export class HomeComponent implements OnInit {
   });
 
   ngOnInit() {
-    /* this._expensesService.getExpenses()
-    .subscribe(resExpensesData => this.expenses = resExpensesData)*/
-    this.expenses = this._expensesService.getExpenses();
-    this.getDashboardsValues();
+     this._expensesService.getExpenses() 
+    .subscribe(res => {
+      this.expenses = res;
+      this.getDashboardsValues();
+    });     
   }
 
   getDashboardsValues = function () {
+
     if (this.expenses && this.expenses.length) {
       this.currentMonthTotalExp = this._dashboarsManager.getCurrentMonthTotalExpenses();
       this.monthWithTheHighestExp = this._dashboarsManager.getHighestMonthInTheYear();

@@ -13,13 +13,22 @@ const MONTH_NAMES = ["January", "February", "March", "April", "May", "June",
 @Injectable()
 export class DashboardsManagerService {
 
+
+  _allExpenses: Expense[];
+  _allExpenseCategories: ExpenseCategory[];
+
   constructor(private _http: Http,
     private _expensesSVC: ExpensesDataService,
-    private _expCategoriesSVC: ExpenseCategoryDataService) { }
+    private _expCategoriesSVC: ExpenseCategoryDataService) {
 
-  getHighestMonthInTheYear = function () {
-    let allExpenses = this._expensesSVC.getExpenses();
+    this._expensesSVC.getExpenses()
+      .subscribe(res => this._allExpenses = res);
 
+    this._expCategoriesSVC.getExpensesCategories()
+      .subscribe(res => this._allExpenseCategories = res);
+  }
+
+  getHighestMonthInTheYear = function () { 
     var n: number = 0;
     var maxExpMonth = 0;
     var maxMonthExp = 0;
@@ -47,7 +56,7 @@ export class DashboardsManagerService {
 
     // get current month expenses
     let currentMonthExpenses: Expense[]
-      = this._expensesSVC.getExpenses().filter((exp: Expense) => exp.expenseStartDate.getMonth() <= currentMonth);
+      = this._allExpenses.filter((exp: Expense) => new Date(exp.expenseStartDate).getMonth() <= currentMonth);
 
     if (currentMonthExpenses.length > 0) {
       let categoriesAmounts: Map<number, number> = this.getMonthCategoriesAmounts(currentMonth);
@@ -56,14 +65,15 @@ export class DashboardsManagerService {
         let _array = Array.from(categoriesAmounts.values());
         var categoryIdAmount = _array.reduce((a, b) => Math.max(a, b));
 
-        categoriesAmounts.forEach( (v, k, m) => {
+        categoriesAmounts.forEach((v, k, m) => {
           if (v == categoryIdAmount) {
-            if(maxCategoryAmount != ""){
+            if (maxCategoryAmount != "") {
               maxCategoryAmount += ", ";
             }
             maxCategoryAmount += this._expCategoriesSVC.getExpCategoryName(k);
           }
         });
+        
         return maxCategoryAmount;
       }
     }
@@ -102,12 +112,11 @@ export class DashboardsManagerService {
   }
 
   getMonthTotalExpense = function (month) {
-    let allExpenses = this._expensesSVC.getExpenses();
-
-    if (allExpenses && allExpenses.length > 0 && allExpenses.filter((exp: Expense) => exp.expenseStartDate.getMonth() <= month).length > 0) {
-      return this.getMonthExpenses(month)
+    if (this._allExpenses && this._allExpenses.length > 0 && this._allExpenses.filter((exp: Expense) => 
+    new Date(exp.expenseStartDate).getMonth() <= month).length > 0) {
+      return Math.round(this.getMonthExpenses(month)
         .map((exp: Expense) => this.getAmount(exp))
-        .reduce((sum, current) => sum + current);
+        .reduce((sum, current) => sum + current));
     }
     else {
       return 0;
@@ -115,24 +124,24 @@ export class DashboardsManagerService {
   }
 
   getAmount = function (exp: Expense) {
-    if (exp.interval == ExpensePeriod.Daily) {
+    if (exp.intervalId == ExpensePeriod.Daily) {
       return exp.amount * 30;
     }
-    else if (exp.interval == ExpensePeriod.Weekly) {
+    else if (exp.intervalId == ExpensePeriod.Weekly) {
       return exp.amount * 4;
     }
-    else if (exp.interval == ExpensePeriod.Monthly) {
+    else if (exp.intervalId == ExpensePeriod.Monthly) {
       return exp.amount;
     }
-    else if (exp.interval == ExpensePeriod.Quarterly) {
+    else if (exp.intervalId == ExpensePeriod.Quarterly) {
       return exp.amount / 3;
     }
-    else if (exp.interval == ExpensePeriod.Yearly) {
+    else if (exp.intervalId == ExpensePeriod.Yearly) {
       return exp.amount / 12;
     }
   }
   getMonthExpenses = function (month) {
-    return this._expensesSVC.getExpenses().filter((exp: Expense) => exp.expenseStartDate.getMonth() <= month);
+    return this._allExpenses.filter((exp: Expense) => new Date(exp.expenseStartDate).getMonth() <= month);
   }
 
   getCurrentYearTotalExpenses = function () {

@@ -24,39 +24,31 @@ export class AddDailyExpenseComponent implements OnInit {
 
   expenseFG: FormGroup;
 
-  currentDate : Date;
+  currentDate: Date;
 
   availableExpensesCategories: ExpenseCategory[];
 
   expensePeriodsLOV: string[] = Object.keys(ExpensePeriod)
     .filter(p => typeof ExpensePeriod[p as any] === "number");
 
-  ExpensePeriod : typeof ExpensePeriod = ExpensePeriod;
-    
+  ExpensePeriod: typeof ExpensePeriod = ExpensePeriod;
+
   constructor(private expCategoriesService: ExpenseCategoryDataService, private expService: ExpensesDataService) { }
 
   ngOnInit(): void {
-    /*this.expCategoriesService.getExpensesCategories()
-      .subscribe(res => this._expensesCategories = res);*/
-    this.availableExpensesCategories = this.expCategoriesService.getExpensesCategories();
+    this.expCategoriesService.getExpensesCategories()
+      .subscribe(res => this.availableExpensesCategories = res);
+    //.subscribe(res => console.log(res.toString()));
+    // this.availableExpensesCategories = this.expCategoriesService.getExpensesCategories();
 
     this.currentDate = new Date();
     this.expenseFG = new FormGroup({
       amount: new FormControl(this.expense ? this.expense.amount : ""),
       title: new FormControl(this.expense ? this.expense.title : ""),
-      expenseStartDate: new FormControl(),
-      isPeriodic: new FormControl(this.expense ? this.expense.interval != ExpensePeriod.None : false ),
-      periodType: new FormControl(),
-      expenseCategoryId: new FormControl()/*,
-        excludedDays: new FormGroup({
-          sunday: new FormControl(),
-          monday: new FormControl(),
-          tuesday: new FormControl(),
-          wednesday: new FormControl(),
-          thursday: new FormControl(),
-          friday: new FormControl(),
-          saturday: new FormControl()
-        })*/
+      expenseStartDate: new FormControl(this.expense? this.expense.expenseStartDate : new Date()),
+      isPeriodic: new FormControl(this.expense ? this.expense.intervalId != ExpensePeriod.None : false),
+      periodType: new FormControl(this.expense ? this.expensePeriodsLOV[this.expense.intervalId.toString()] : ExpensePeriod.None.toString()),
+      expenseCategoryId: new FormControl(this.expense ? this.expense.expenseCategoryId : -1)
     });
   }
 
@@ -72,26 +64,28 @@ export class AddDailyExpenseComponent implements OnInit {
     this.expense.amount = parseFloat(value.amount);
 
     this.expense.date = new Date();
- 
+
     this.expense.expenseStartDate = new Date(value.expenseStartDate);
 
     if (value.periodType) {
-      this.expense.interval = ExpensePeriod[value.periodType];
+      this.expense.intervalId = ExpensePeriod[value.periodType];
     }
+
+    let that = this;
 
     if (value.expenseCategoryId) {
-      this.expense.expenseCategoryId = this.expCategoriesService.getExpCategoryId(value.expenseCategoryId);
+      if (isNew) {
+        this.expCategoriesService.getExpCategoryId(value.expenseCategoryId).subscribe(res => {
+          that.expense.expenseCategoryId = res;
+          that.expense._id = Math.floor(Math.random() * 100);
+          that.expService.postExpense(that.expense)
+            .subscribe(res => that.onSubmit.emit(that.expense));
+        });
+      }
+      else {
+        that.expService.updateExpense(that.expense)
+          .then(res => that.onSubmit.emit(that.expense));
+      }
     }
-
-    if (isNew) {
-      this.expense._id = Math.floor(Math.random() * 100);
-
-      this.expService.postExpense(this.expense);
-    }
-    else {
-      this.expService.updateExpense(this.expense);
-    }
-
-    this.onSubmit.emit(this.expense);
   }
 }

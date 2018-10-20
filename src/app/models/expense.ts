@@ -7,5 +7,5 @@ export class Expense{
     amount : number;
     date : Date;
     expenseStartDate : Date;
-    interval : ExpensePeriod;
+    intervalId : Number
 }

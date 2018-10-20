@@ -29,10 +29,9 @@ export class AddExpensesCategoryComponent implements OnInit {
 
   ngOnInit() {
     // get available expenses categories
-    this.availableExpensesCategories = this._expenseCategroyDataSVC.getExpensesCategories();
-    /*this._expenseCategroyDataSVC.getExpensesCategories()
-    .subscribe(res => this._expensesCategories = res); */
-
+    // this.availableExpensesCategories = this._expenseCategroyDataSVC.getExpensesCategories();
+    this._expenseCategroyDataSVC.getExpensesCategories()
+    .subscribe(res => this.availableExpensesCategories = res);  
     this.expenseCategoryFG = new FormGroup({
       description: new FormControl(this.expenseCategory ? this.expenseCategory.title : ""),
       expenseCategoryId: new FormControl()
@@ -56,10 +55,11 @@ export class AddExpensesCategoryComponent implements OnInit {
         && this.availableExpensesCategories.length > 0 ?
         this.availableExpensesCategories[this.availableExpensesCategories.length - 1]._id + 1 : 1;
 
-      this._expenseCategroyDataSVC.postNewExpenseCategory(this.expenseCategory);
+      this._expenseCategroyDataSVC.postNewExpenseCategory(this.expenseCategory)
+        .subscribe(res => this.availableExpensesCategories = res);  
     }
     else {
-      this._expenseCategroyDataSVC.updateExpenseCategory(this.expenseCategory);
+      this._expenseCategroyDataSVC.updateExpenseCategory(this.expenseCategory);  
     }
 
     this.onSubmit.emit(this.expenseCategory);

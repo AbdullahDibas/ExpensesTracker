@@ -63,9 +63,9 @@ export class ExpensesCategoriesListComponent implements OnInit, AfterViewInit {
   }
 
   setExpensesCategoriesList = function () {
-    /*this._expensesCategoriesService.getExpensesCategories()
-    .subscribe(res => this._expensesCategories = res);*/
-    this._expensesCategories = this._expensesCategoriesService.getExpensesCategories();
+    this._expensesCategoriesService.getExpensesCategories()
+    .subscribe(res => this._expensesCategories = res);
+   // this._expensesCategories = this._expensesCategoriesService.getExpensesCategories();
   }
 
   onSelect = function (expenseCat: ExpenseCategory) {

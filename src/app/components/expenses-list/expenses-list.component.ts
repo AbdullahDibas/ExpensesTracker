@@ -30,9 +30,8 @@ export class ExpensesListComponent implements OnInit {
   constructor(private expensesDataSVC: ExpensesDataService, private expCategorySVC: ExpenseCategoryDataService) { }
 
   ngOnInit() {
-    /*this.expensesDataSVC.getExpenses()
-    .subscribe(res => this._expenses = res);*/
-    this._expenses = this.expensesDataSVC.getExpenses();
+    this.expensesDataSVC.getExpenses()
+     .subscribe(res => this._expenses = res);
   }
 
   onAddNew = function () {
@@ -42,7 +41,9 @@ export class ExpensesListComponent implements OnInit {
   onNewAddedExpense = function () {
     this._isAddView = false;
     this._selectedExpense = null; 
-    this._expenses = this.expensesDataSVC.getExpenses();
+
+    this.expensesDataSVC.getExpenses()
+    .subscribe(res => this._expenses = res);
   }
 
 
@@ -64,7 +65,9 @@ export class ExpensesListComponent implements OnInit {
       this.expensesDataSVC.deleteExpense(id);
     });
     this._selectedExpensesIds = null;
-    this._expenses = this.expensesDataSVC.getExpenses();
+    
+    this.expensesDataSVC.getExpenses()
+    .subscribe(res => this._expenses = res);
   }
 
   onSelect = function (expense: Expense) {
