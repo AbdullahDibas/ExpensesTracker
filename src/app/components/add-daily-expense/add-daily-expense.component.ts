@@ -67,9 +67,10 @@ export class AddDailyExpenseComponent implements OnInit {
 
     this.expense.expenseStartDate = new Date(value.expenseStartDate);
 
-    if (value.periodType) {
-      this.expense.intervalId = ExpensePeriod[value.periodType];
-    }
+    this.expense.intervalId =  value.periodType;
+    // if (value.periodType) {
+    //   this.expense.intervalId = ExpensePeriod[value.periodType];
+    // }
 
     let that = this;
 

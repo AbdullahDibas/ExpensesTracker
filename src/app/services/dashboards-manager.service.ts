@@ -21,11 +21,15 @@ export class DashboardsManagerService {
     private _expensesSVC: ExpensesDataService,
     private _expCategoriesSVC: ExpenseCategoryDataService) {
 
+    this.getExpensesDetails();
+  }
+
+  getExpensesDetails = function() {
     this._expensesSVC.getExpenses()
-      .subscribe(res => this._allExpenses = res);
+    .subscribe((res: any) => this._allExpenses = res);
 
     this._expCategoriesSVC.getExpensesCategories()
-      .subscribe(res => this._allExpenseCategories = res);
+     .subscribe(res => this._allExpenseCategories = res);
   }
 
   getHighestMonthInTheYear = function () { 
@@ -138,6 +142,9 @@ export class DashboardsManagerService {
     }
     else if (exp.intervalId == ExpensePeriod.Yearly) {
       return exp.amount / 12;
+    }
+    else if (exp.intervalId == ExpensePeriod.None) {
+      return exp.amount;
     }
   }
   getMonthExpenses = function (month) {

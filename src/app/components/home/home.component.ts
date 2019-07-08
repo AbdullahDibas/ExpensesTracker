@@ -11,7 +11,7 @@ import { DashboardsManagerService } from '../../services/dashboards-manager.serv
 export class HomeComponent implements OnInit {
 
   constructor(private _expensesService: ExpensesDataService,
-    private _dashboarsManager: DashboardsManagerService) { }
+    private  _dashboarsManager: DashboardsManagerService) { }
 
   currentMonthTotalExp: number;
   currentYearTotalExp: number;
@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
   getDashboardsValues = function () {
 
     if (this.expenses && this.expenses.length) {
+      this._dashboarsManager.getExpensesDetails();
       this.currentMonthTotalExp = this._dashboarsManager.getCurrentMonthTotalExpenses();
       this.monthWithTheHighestExp = this._dashboarsManager.getHighestMonthInTheYear();
       this.expCategoryWithTheHighestExp = this._dashboarsManager.getHighestExpCategoryInTheMonth();
